@@ -19,25 +19,13 @@ app.all(['/url'], function(req, res, next) {
 	var method = req.method.toLowerCase()
 	var body = req.body
 	var key = req.query.key
+	var sort = req.query.sort
 	var promises;
 
-	console.log("body", body, "key", key, "query", req.query)
-	// Handle request based on method type
-	if (method == 'get') {
-		// : is a list of filenames
-		results = _.filter(
-			[req.query.key], 
-			(val)=>{return val})
-		// : is a list of promises to find matches in the filename
-		results = _.map(results, (location)=>{return file_search(key) })
-
-		// Capture all promises and send to the client
-		Promise.all(results).then(result=>{
-			// Return all the search results
-			res.json(result)
-			
-		}).catch(error=>res.status(404).json(error))
-	}
+	// get keys from file
+	file_search(key, sort)
+		.then(keywords=>res.json(keywords))
+		.catch(errors=>res.status(404).json(errors));
 
 })
 
@@ -51,38 +39,30 @@ server.listen(port, () => console.log(`App running on localhost:${port}`))
 // then will use the text as an input to match req.params search strings against
 // the result is either null or an array with the line number and text of match 
 // eg: [ {line: 1, text: 'This is the string to search text in'} ]
-function file_search( file ) 
+function file_search( file, sort ) 
 { 
 	var file_extension = file.split('.')[file.split('.').length -1] || "unknown";
 	var file_is_url = file.split('//')[0].search('htt') >= 0;
+	var sort_order = !!sort ? sort.toLowerCase() === 'asc' ? 1 : -1 : null;
 
 	return new Promise((resolve, reject)=> {
+		
 		// If the file_is_url then use async ajax call
-
 		!file_is_url ? textract.fromFileWithPath( file, function( error, text_body ) {
 			// get keywords by density in the text body
 			keywords = get_keywords( text_body, file );
+			!!sort ? keywords = 
+				Object.keys(keywords)
+					.map(k=>k)
+					.sort((k1, k2)=> (k1 > k2) ? (1 * sort_order) : (k1 < k2) ? (-1 * sort_order) : 0)
+					.map(k=>({ [k]: keywords[k] }))
+						.reduce((p,c,i,a)=>{
+						p[ Object.keys(c)[0] ] = c[ Object.keys(c)[0] ];
+						return p;
+					}) : null;
 
-			// console.log("Keyword Density: ", keywords, text_body);
-			if (!error) {
-				// Debugging
-				console.log(`No Errors for file: '${file}'.`)
-				// Complete string search
-				return resolve({ [file]: keywords })
-		  	} 
-		  	else {
-		  		// Debugging
-		  		// console.log(`Errors found in file: '${file}'. Matching text: ${word_match_query}`)
-
-		  		if (!file_extension == 'unknown' || file_extension == 'pdf') {
-		  			pdf_search( file, keywords, file )
-		  				.then(r=>resolve(r))
-						.then(r=>reject(r))
-		  		} else {
-		  			// Just try to do a basic filename match
-		  			return resolve({ [file]: keywords })
-		  		}
-		  	}
+			if (!error) return resolve({ [file]: keywords })
+		  	else reject({ [file]: keywords })
 		}) : null;
 
 
@@ -90,52 +70,24 @@ function file_search( file )
 		file_is_url ? textract.fromUrl( file, function( error, text_body ) {
 			// get keywords by density in the text body
 			keywords = get_keywords( text_body, file );
+			!!sort ? keywords = 
+				Object.keys(keywords)
+					.map(k=>k)
+					.sort((k1, k2)=> (k1 > k2) ? (1 * sort_order) : (k1 < k2) ? (-1 * sort_order) : 0)
+					.map(k=>({ [k]: keywords[k] }))
+					.reduce((p,c,i,a)=>{
+						p[ Object.keys(c)[0] ] = c[ Object.keys(c)[0] ];
+						return p;
+					}) : null;
 
-			// console.log("Keyword Density: ", error, text_body, file, word_match_query);
-			if (!error) {
-				// Debugging
-				console.log(`No Errors for file: '${file}'.`)
-				// Complete resolve
-				return resolve({ [file]: keywords })
-		  	} 
-		  	else {
-		  		// Debugging
-		  		// console.log(`Errors found in file: '${file}'. Matching text: ${word_match_query}`)
-
-		  		if (!file_extension == 'unknown' || file_extension == 'pdf') {
-		  			pdf_search( file, keywords )
-		  				.then(r=>resolve(r))
-						.then(r=>reject(r))
-		  		} else {
-		  			// Just try to do a basic filename match
-		  			return resolve({ [file]: keywords })
-		  		}
-		  	}
+			if (!error) return resolve({ [file]: keywords })
+		  	else reject({ [file]: keywords })
 		}) : null;
 
 	})
 
 
 }
-
-function pdf_search( file, keywords ) 
-{ 
-	var file_extension = file.split('.')[1] || "unknown";
-	return new Promise((resolve, reject)=>{
-		pdf_extract(file, function(_error, text_body) {
-		    if (!_error) {
-		        // Try to process other files
-		        console.log("Text Body", text_body)
-		        return find_query_in_string( text_body, keywords)
-		    } else {
-		        // Debugging
-		        console.log(`Could not process data`, _error);
-		        return resolve({ [file]: keywords })
-		    }
-		})
-	})
-}
-
 
 function get_keywords( text_body, file ) 
 { 
