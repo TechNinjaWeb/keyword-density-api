@@ -1,0 +1,252 @@
+{
+    "usage":
+    {
+        "text_units": 5,
+        "text_characters": 50000,
+        "features": 2
+    },
+    "language": "en",
+    "keywords": [
+    {
+        "text": "dissertation",
+        "relevance": 0.994266
+    },
+    {
+        "text": "writing",
+        "relevance": 0.926914
+    },
+    {
+        "text": "dissertation writing",
+        "relevance": 0.917591
+    },
+    {
+        "text": "students",
+        "relevance": 0.895442
+    },
+    {
+        "text": "doctoral students",
+        "relevance": 0.828757
+    },
+    {
+        "text": "writing process",
+        "relevance": 0.81551
+    },
+    {
+        "text": "book",
+        "relevance": 0.807989
+    },
+    {
+        "text": "demystifying dissertation writing",
+        "relevance": 0.801255
+    },
+    {
+        "text": "fluent writing",
+        "relevance": 0.791861
+    },
+    {
+        "text": "academic writing",
+        "relevance": 0.783853
+    },
+    {
+        "text": "regular writing routine",
+        "relevance": 0.781867
+    },
+    {
+        "text": "dissertation committee members",
+        "relevance": 0.736077
+    },
+    {
+        "text": "social sciences",
+        "relevance": 0.733832
+    },
+    {
+        "text": "dissertation writing seminar",
+        "relevance": 0.731581
+    },
+    {
+        "text": "graduate school",
+        "relevance": 0.730913
+    },
+    {
+        "text": "DISSERTATION WRITING habits",
+        "relevance": 0.729769
+    },
+    {
+        "text": "dissertation adviser",
+        "relevance": 0.718594
+    },
+    {
+        "text": "formal writing seminars",
+        "relevance": 0.702929
+    },
+    {
+        "text": "writing groups",
+        "relevance": 0.683142
+    },
+    {
+        "text": "informal writing groups",
+        "relevance": 0.680268
+    },
+    {
+        "text": "faculty member",
+        "relevance": 0.671198
+    },
+    {
+        "text": "writing routine Working",
+        "relevance": 0.670425
+    },
+    {
+        "text": "Vermont DEMYSTIFYING DISSERTATION",
+        "relevance": 0.66833
+    },
+    {
+        "text": "time",
+        "relevance": 0.667683
+    },
+    {
+        "text": "mal writing groups",
+        "relevance": 0.665532
+    },
+    {
+        "text": "long-term writing project",
+        "relevance": 0.664568
+    },
+    {
+        "text": "doctoral program",
+        "relevance": 0.661235
+    },
+    {
+        "text": "academic writing process",
+        "relevance": 0.66073
+    },
+    {
+        "text": "doctoral dissertation",
+        "relevance": 0.66008
+    },
+    {
+        "text": "social science",
+        "relevance": 0.655655
+    },
+    {
+        "text": "fluent writing habits",
+        "relevance": 0.655345
+    },
+    {
+        "text": "new writing techniques",
+        "relevance": 0.652617
+    },
+    {
+        "text": "writing skills",
+        "relevance": 0.652528
+    },
+    {
+        "text": "dissertation process",
+        "relevance": 0.651961
+    },
+    {
+        "text": "right dissertation adviser",
+        "relevance": 0.649085
+    },
+    {
+        "text": "Designated Writing Space",
+        "relevance": 0.649025
+    },
+    {
+        "text": "graduate students",
+        "relevance": 0.648274
+    },
+    {
+        "text": "Writing Routine Looks",
+        "relevance": 0.647785
+    },
+    {
+        "text": "ACADEMIC WRITING Blocking",
+        "relevance": 0.64686
+    },
+    {
+        "text": "social science students",
+        "relevance": 0.645533
+    },
+    {
+        "text": "peg boyle single",
+        "relevance": 0.643333
+    },
+    {
+        "text": "new faculty members",
+        "relevance": 0.642234
+    },
+    {
+        "text": "disserta- tion",
+        "relevance": 0.642037
+    },
+    {
+        "text": "strong writing networks",
+        "relevance": 0.641682
+    },
+    {
+        "text": "supportive dissertation adviser",
+        "relevance": 0.641476
+    },
+    {
+        "text": "dissertation topic",
+        "relevance": 0.64004
+    },
+    {
+        "text": "Disserta- tion Writing",
+        "relevance": 0.638226
+    },
+    {
+        "text": "large-scale writing project",
+        "relevance": 0.634521
+    },
+    {
+        "text": "citeable notes",
+        "relevance": 0.634162
+    },
+    {
+        "text": "interactive reading",
+        "relevance": 0.630437
+    }],
+    "concepts": [
+    {
+        "text": "Doctor of Philosophy",
+        "relevance": 0.983483,
+        "dbpedia_resource": "http://dbpedia.org/resource/Doctor_of_Philosophy"
+    },
+    {
+        "text": "Doctorate",
+        "relevance": 0.976843,
+        "dbpedia_resource": "http://dbpedia.org/resource/Doctorate"
+    },
+    {
+        "text": "Academia",
+        "relevance": 0.951013,
+        "dbpedia_resource": "http://dbpedia.org/resource/Academia"
+    },
+    {
+        "text": "Graduate school",
+        "relevance": 0.898993,
+        "dbpedia_resource": "http://dbpedia.org/resource/Graduate_school"
+    },
+    {
+        "text": "Academic degree",
+        "relevance": 0.850619,
+        "dbpedia_resource": "http://dbpedia.org/resource/Academic_degree"
+    },
+    {
+        "text": "Writing",
+        "relevance": 0.816988,
+        "dbpedia_resource": "http://dbpedia.org/resource/Writing"
+    },
+    {
+        "text": "Postgraduate education",
+        "relevance": 0.814038,
+        "dbpedia_resource": "http://dbpedia.org/resource/Postgraduate_education"
+    },
+    {
+        "text": "College",
+        "relevance": 0.710773,
+        "dbpedia_resource": "http://dbpedia.org/resource/College"
+    }],
+    "warnings": ["Text content exceeds 50000 character limit. Only first 50000 characters processed..."]
+}

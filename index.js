@@ -9,6 +9,22 @@ const textract = require('textract')
 const pdf_extract = require('pdf-text-extract')
 const countWords = require("count-words")
 
+var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
+var fs = require('fs');
+
+var credentials = {
+  "url": "https://gateway.watsonplatform.net/natural-language-understanding/api",
+  "username": "711a654d-96b5-48bb-a5fc-36cd7fcaa35c",
+  "password": "YevSCD8Gwnz1"
+}
+
+var nlu = new NaturalLanguageUnderstandingV1({
+  username:     credentials.username,
+  password:     credentials.password,
+  version_date: NaturalLanguageUnderstandingV1.VERSION_DATE_2017_02_27
+});
+ 
+
 // Express App setup
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
@@ -27,6 +43,27 @@ app.all(['/url'], function(req, res, next) {
 		.then(keywords=>res.json(keywords))
 		.catch(errors=>res.status(404).json(errors));
 
+})
+
+// Send all traffic through this endpoint
+app.all(['/nlp'], function(req, res, next) {
+	textract.fromFileWithPath( './peg.pdf', function( error, file_data ) {
+		nlu.analyze({
+		    'html': file_data, // Buffer or String
+		    'features': {
+		        'concepts': {},
+		        'keywords': {},
+		    }
+		}, function(err, response) {
+		    if (err) {
+		        console.error(err);
+		        res.status(404).json(response)
+		    } else {
+		        console.log(JSON.stringify(response, null, 2));
+		        res.json(response)
+		    }
+		});
+	})
 })
 
 // Begin server
